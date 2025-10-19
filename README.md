@@ -1,6 +1,8 @@
-# AI-Powered Todo List Backend
+# TodoIQ Backend
 
-A robust FastAPI backend with AI integration for intelligent task management. Features JWT authentication, CRUD operations, and AI-powered task generation and prioritization using Groq's Llama 3 model.
+A robust FastAPI backend with AI integration for intelligent task management. Features JWT authentication, CRUD operations, and AI-powered task generation and prioritization using OpenAI's GPT-4o-mini model.
+
+**TodoIQ** - Smarter to-do app powered by AI.
 
 ## ✨ Features
 
@@ -8,7 +10,7 @@ A robust FastAPI backend with AI integration for intelligent task management. Fe
 
 - **Smart Task Generation**: Convert natural language into actionable subtasks
 - **AI Re-prioritization**: Automatically reorder tasks based on importance and context
-- **Groq Integration**: Powered by Llama 3-70b-8192 model for fast AI responses
+- **OpenAI Integration**: Powered by GPT-4o-mini model for intelligent AI responses
 - **Contextual Understanding**: AI analyzes task relationships and dependencies
 
 ### 🔐 Authentication & Security
@@ -41,8 +43,9 @@ A robust FastAPI backend with AI integration for intelligent task management. Fe
 - **ORM**: SQLAlchemy 2.0+
 - **Authentication**: JWT with python-jose
 - **Password Hashing**: Bcrypt
-- **AI Integration**: Groq API with Llama 3-70b-8192
+- **AI Integration**: OpenAI API with GPT-4o-mini
 - **Validation**: Pydantic v2
+- **Dependencies**: openai==1.58.1 for AI service integration
 
 ### Project Structure
 
@@ -64,7 +67,7 @@ Backend/
 │   │   ├── todo_schema.py  # Todo request/response schemas
 │   │   └── ai_schema.py    # AI service schemas
 │   ├── services/           # Business logic
-│   │   └── ai_service.py   # Groq AI integration
+│   │   └── ai_service.py   # OpenAI AI integration
 │   ├── database/           # Database configuration
 │   │   └── database.py     # SQLAlchemy setup
 │   └── main.py            # FastAPI application entry point
@@ -78,7 +81,7 @@ Backend/
 
 - Python 3.8+
 - pip or poetry
-- Groq API key
+- OpenAI API key
 
 ### Installation
 
@@ -106,7 +109,7 @@ pip install -r requirements.txt
    Create a `.env` file in the Backend directory:
 
 ```env
-GROQ_API_KEY=your_groq_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
 SECRET_KEY=your_secret_key_here
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
@@ -297,13 +300,13 @@ Re-prioritize all user tasks using AI.
 
 ### Environment Variables
 
-| Variable                      | Description                  | Default              | Required |
-| ----------------------------- | ---------------------------- | -------------------- | -------- |
-| `GROQ_API_KEY`                | Groq API key for AI services | -                    | Yes      |
-| `SECRET_KEY`                  | JWT secret key               | -                    | Yes      |
-| `ALGORITHM`                   | JWT algorithm                | HS256                | No       |
-| `ACCESS_TOKEN_EXPIRE_MINUTES` | Token expiration time        | 30                   | No       |
-| `DATABASE_URL`                | Database connection string   | sqlite:///./todos.db | No       |
+| Variable                      | Description                    | Default              | Required |
+| ----------------------------- | ------------------------------ | -------------------- | -------- |
+| `OPENAI_API_KEY`              | OpenAI API key for AI services | -                    | Yes      |
+| `SECRET_KEY`                  | JWT secret key                 | -                    | Yes      |
+| `ALGORITHM`                   | JWT algorithm                  | HS256                | No       |
+| `ACCESS_TOKEN_EXPIRE_MINUTES` | Token expiration time          | 30                   | No       |
+| `DATABASE_URL`                | Database connection string     | sqlite:///./todos.db | No       |
 
 ### Database Configuration
 
@@ -315,31 +318,34 @@ The application supports multiple database backends:
 
 ## 🤖 AI Integration
 
-### Groq API Setup
+### OpenAI API Setup
 
-1. **Get API Key**: Sign up at [console.groq.com](https://console.groq.com)
+1. **Get API Key**: Sign up at [platform.openai.com](https://platform.openai.com)
 2. **Set Environment Variable**: Add your API key to `.env`
-3. **Model Used**: `llama3-70b-8192` for optimal performance
+3. **Model Used**: `gpt-4o-mini` for optimal performance and cost-effectiveness
+4. **AI Personality**: MindfulCoach - a calm but decisive planning expert that focuses on energy, dependencies, and momentum
 
 ### AI Features
 
 #### Task Generation
 
-The AI analyzes natural language input and generates:
+The AI analyzes natural language input using GPT-4o-mini and generates:
 
-- Specific, actionable subtasks
-- Appropriate priority levels (1-10)
-- Detailed descriptions
-- Logical task ordering
+- Specific, actionable subtasks (6-9 items per request)
+- Appropriate priority levels (1-10) with no ties or gaps
+- Detailed descriptions with specific actions
+- Logical task ordering based on energy and dependencies
+- ISO 8601 timestamps for proper scheduling
 
 #### Smart Re-prioritization
 
-The AI considers:
+The AI considers using GPT-4o-mini:
 
 - Task importance and urgency
 - Dependencies between tasks
-- User context and goals
-- Time sensitivity
+- Energy levels and focus requirements
+- Natural workflow patterns
+- Momentum and burnout prevention
 
 ## 🛠️ Development
 
@@ -407,7 +413,7 @@ pytest --cov=app
 1. **Environment Configuration**
 
 ```bash
-export GROQ_API_KEY=your_production_key
+export OPENAI_API_KEY=your_production_key
 export SECRET_KEY=your_secure_secret_key
 export DATABASE_URL=postgresql://user:pass@host:port/db
 ```
@@ -476,9 +482,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **AI Service Error**
 
-- Verify GROQ_API_KEY is set
+- Verify OPENAI_API_KEY is set
 - Check API key validity
-- Monitor rate limits
+- Monitor rate limits and usage
 
 **Authentication Error**
 
