@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Optional
 
 
 class TodoCreate(BaseModel):
@@ -7,6 +8,13 @@ class TodoCreate(BaseModel):
     description: str
     priority: int
     created_at: datetime
+
+
+class TodoUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    priority: Optional[int] = None
+    completed: Optional[bool] = None
 
 
 class TodoResponse(BaseModel):

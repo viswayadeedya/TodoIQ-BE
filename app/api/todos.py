@@ -38,7 +38,7 @@ def get_all_todos(
 @router.put("/{todo_id}", response_model=schemas.TodoResponse)
 def update_todo(
         todo_id: int,
-        todo_update: schemas.TodoCreate,
+        todo_update: schemas.TodoUpdate,
         db: Session = Depends(dependencies.get_db),
         current_user: models.User = Depends(dependencies.get_current_user)
 ):
